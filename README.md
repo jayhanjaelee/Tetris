@@ -1,0 +1,6 @@
+# Tetris
+
+## Requirements 
+
+* c++
+* raylib
