@@ -31,7 +31,19 @@ std::vector<Block> Game::GetAllBlocks()
 void Game::Draw()
 {
     grid.Draw();
-    currentBlock.Draw();
+    currentBlock.Draw(11, 11);
+    switch (nextBlock.id)
+    {
+    case 3:
+        nextBlock.Draw(255, 290);
+        break;
+    case 4:
+        nextBlock.Draw(255, 280);
+        break;
+    default:
+        nextBlock.Draw(270, 270);
+        break;
+    }
 }
 
 void Game::HandleInput()
@@ -42,19 +54,19 @@ void Game::HandleInput()
         gameOver = false;
         Reset();
     }
-    switch(keyPressed)
+    switch (keyPressed)
     {
-        case KEY_LEFT:
+    case KEY_LEFT:
         MoveBlockLeft();
         break;
-        case KEY_RIGHT:
+    case KEY_RIGHT:
         MoveBlockRight();
         break;
-        case KEY_DOWN:
+    case KEY_DOWN:
         MoveBlockDown();
         UpdateScore(0, 1);
         break;
-        case KEY_UP:
+    case KEY_UP:
         RotateBlock();
         break;
     }
@@ -62,7 +74,8 @@ void Game::HandleInput()
 
 void Game::MoveBlockLeft()
 {
-    if (!gameOver) {
+    if (!gameOver)
+    {
         currentBlock.Move(0, -1);
         if (IsBlockOutside() || BlockFits() == false)
         {
